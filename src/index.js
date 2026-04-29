@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 const myToDo = [{description: "Call a client"}, 
 				{description: "Send my boss an email"}, 
-				{description: "Attend a client's meeting"}];
+				{description: "Wash the dishes"}];
 // create function buildToDo
 function buildToDo(task) {
 	const taskList = document.querySelector("#tasks");
@@ -20,7 +20,7 @@ const form = document.querySelector("#create-task-form");
 
 function handleSubmit(event){ 
 	event.preventDefault(); //add preventDefault()
-	const taskInput = event.target["new-task-description"].value; //select the correct target from the event and saving it as taskInput
+	const taskInput = event.target.querySelector("#new-task-description").value; //select the correct target from the event and saving it as taskInput
 
 	const newTask = { //object
 		description: taskInput
