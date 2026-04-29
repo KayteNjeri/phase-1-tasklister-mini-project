@@ -1,32 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // add event listener to form
-  const form = document.querySelector("#create-task-form");
+const myToDo = [{description: "Call a client"}, 
+				{description: "Send my boss an email"}, 
+				{description: "Attend a client's meeting"}];
+// create function buildToDo
+function buildToDo(task) {
+	const taskList = document.querySelector("#tasks");
+	const newTask = document.createElement("li"); //create the new li element
 
-	function handleSubmit(event){ 
-		event.preventDefault(); //add preventDefault()
-		const taskInput = event.target["new-task-description"].value; //select the correct target from the event and saving it as taskInput
+	newTask.textContent = task.description; //add the task as the textContent
 
-		const newTask = { //object
-			description: taskInput
-		};	
-		buildToDo(newTask); //call the function
-		event.target.reset(); //clear the input
-		//console.log("Task has been submitted");
-		//console.log(newTask);
-	};
-
-	form.addEventListener("submit", (event) => { //add submit for type of event and add arrow function
-		handleSubmit(event);
-
+	taskList.append(newTask); //append the li element to tasklist
+	}
+	myToDo.forEach(task => {
+		buildToDo(task)
 	});
 
-	function buildToDo(task) {
-		const taskList = document.querySelector("#tasks");
-		const newTask = document.createElement("li"); //create the new li element
+	// add event listener to form
+const form = document.querySelector("#create-task-form");
 
-		newTask.textContent = task.description; //add the task as the textContent
+function handleSubmit(event){ 
+	event.preventDefault(); //add preventDefault()
+	const taskInput = event.target["new-task-description"].value; //select the correct target from the event and saving it as taskInput
 
-		taskList.append(newTask); //append the li element to tasklist
-	}
+	const newTask = { //object
+		description: taskInput
+		};	
+
+	myToDo.push(newTask);
+	buildToDo(newTask); //call the function
+	//event.target.reset(); //clear the input
+	
+	//console.log("Task has been submitted");
+	//console.log(newTask);
+	};
+
+form.addEventListener("submit", (event) => { //add submit for type of event and add arrow function
+	handleSubmit(event);
+	});
 });
 
